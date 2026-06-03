@@ -21,8 +21,8 @@
     </resultMap>
 
     <insert id="insertOrder" parameterType="com.lorenzovendrame.orderservice.domain.Order">
-        INSERT INTO tb_orders (order_id, saga_id, user_id, event_id, total_price, status)
-        VALUES (#{orderId}, #{sagaId}, #{userId}, #{eventId}, #{totalPrice}, #{status})
+        INSERT INTO tb_orders (order_id, saga_id, user_id, event_id, total_price, status, created_at, updated_at)
+        VALUES (#{orderId}, #{sagaId}, #{userId}, #{eventId}, #{totalPrice}, #{status}, #{createdAt}, #{updatedAt})
     </insert>
 
     <insert id="insertOrderItem" parameterType="com.lorenzovendrame.orderservice.domain.OrderItem">
