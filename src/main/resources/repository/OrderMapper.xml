@@ -3,46 +3,46 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.bilheteria.orderservice.mapper.OrderMapper">
+<mapper namespace="com.lorenzovendrame.orderservice.repository.OrderMapper">
 
-    <resultMap id="OrderResultMap" type="com.bilheteria.orderservice.domain.Order">
-        <id property="orderId" column="order_id" typeHandler="com.lorenzovendrame.identityservice.config.UuidBinaryTypeHandler"/>
-        <result property="sagaId" column="saga_id" typeHandler="com.lorenzovendrame.identityservice.config.UuidBinaryTypeHandler"/>
-        <result property="userId" column="user_id" typeHandler="com.lorenzovendrame.identityservice.config.UuidBinaryTypeHandler"/>
-        <result property="eventId" column="event_id" typeHandler="com.lorenzovendrame.identityservice.config.UuidBinaryTypeHandler"/>
+    <resultMap id="OrderResultMap" type="com.lorenzovendrame.orderservice.domain.Order">
+        <id property="orderId" column="order_id" typeHandler="com.lorenzovendrame.orderservice.config.UuidBinaryTypeHandler"/>
+        <result property="sagaId" column="saga_id" typeHandler="com.lorenzovendrame.orderservice.config.UuidBinaryTypeHandler"/>
+        <result property="userId" column="user_id" typeHandler="com.lorenzovendrame.orderservice.config.UuidBinaryTypeHandler"/>
+        <result property="eventId" column="event_id" typeHandler="com.lorenzovendrame.orderservice.config.UuidBinaryTypeHandler"/>
         <result property="totalPrice" column="total_price"/>
         <result property="status" column="status"/>
         <result property="createdAt" column="created_at"/>
         <result property="updatedAt" column="updated_at"/>
 
         <collection property="items" column="order_id"
-                    ofType="com.bilheteria.orderservice.domain.OrderItem"
+                    ofType="com.lorenzovendrame.orderservice.domain.OrderItem"
                     select="findItemsByOrderId"/>
     </resultMap>
 
-    <insert id="insertOrder" parameterType="com.bilheteria.orderservice.domain.Order">
-        INSERT INTO orders (order_id, saga_id, user_id, event_id, total_price, status)
+    <insert id="insertOrder" parameterType="com.lorenzovendrame.orderservice.domain.Order">
+        INSERT INTO tb_orders (order_id, saga_id, user_id, event_id, total_price, status)
         VALUES (#{orderId}, #{sagaId}, #{userId}, #{eventId}, #{totalPrice}, #{status})
     </insert>
 
-    <insert id="insertOrderItem" parameterType="com.bilheteria.orderservice.domain.OrderItem">
+    <insert id="insertOrderItem" parameterType="com.lorenzovendrame.orderservice.domain.OrderItem">
         INSERT INTO order_items (order_item_id, order_id, ticket_type, quantity, seat_identifier)
         VALUES (#{orderItemId}, #{orderId}, #{ticketType}, #{quantity}, #{seatIdentifier})
     </insert>
 
     <update id="updateOrderStatus">
-        UPDATE orders
+        UPDATE tb_orders
         SET status = #{status}
         WHERE order_id = #{orderId}
     </update>
 
     <select id="findById" resultMap="OrderResultMap">
         SELECT order_id, saga_id, user_id, event_id, total_price, status, created_at, updated_at
-        FROM orders
+        FROM tb_orders
         WHERE order_id = #{orderId}
     </select>
 
-    <select id="findItemsByOrderId" resultType="com.bilheteria.orderservice.domain.OrderItem">
+    <select id="findItemsByOrderId" resultType="com.lorenzovendrame.orderservice.domain.OrderItem">
         SELECT
             order_item_id AS orderItemId,
             order_id AS orderId,
