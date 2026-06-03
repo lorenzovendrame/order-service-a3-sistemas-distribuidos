@@ -4,7 +4,7 @@ import java.util.UUID;
 
 public class OrderItem {
     private UUID orderItemId;
-    private String orderId;
+    private UUID orderId;
     private String ticketType;  // "MEIA", "INTEIRA"
     private Integer quantity;
     private String seatIdentifier;
@@ -13,8 +13,8 @@ public class OrderItem {
 
     public UUID getOrderItemId() { return orderItemId; }
     public void setOrderItemId(UUID orderItemId) { this.orderItemId = orderItemId; }
-    public String getOrderId() { return orderId; }
-    public void setOrderId(String orderId) { this.orderId = orderId; }
+    public UUID getOrderId() { return orderId; }
+    public void setOrderId(UUID orderId) { this.orderId = orderId; }
     public String getTicketType() { return ticketType; }
     public void setTicketType(String ticketType) { this.ticketType = ticketType; }
     public Integer getQuantity() { return quantity; }
