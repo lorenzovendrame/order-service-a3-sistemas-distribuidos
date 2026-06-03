@@ -9,7 +9,7 @@ public class Order {
     private UUID orderId;
     private UUID sagaId;
     private UUID userId;
-    private Long eventId;
+    private UUID eventId;
     private BigDecimal totalPrice;
     private String status;     // PENDING, COMPLETED, CANCELED
     private LocalDateTime createdAt;
@@ -24,8 +24,8 @@ public class Order {
     public void setSagaId(UUID sagaId) { this.sagaId = sagaId; }
     public UUID getUserId() { return userId; }
     public void setUserId(UUID userId) { this.userId = userId; }
-    public Long getEventId() { return eventId; }
-    public void setEventId(Long eventId) { this.eventId = eventId; }
+    public UUID getEventId() { return eventId; }
+    public void setEventId(UUID eventId) { this.eventId = eventId; }
     public BigDecimal getTotalPrice() { return totalPrice; }
     public void setTotalPrice(BigDecimal totalPrice) { this.totalPrice = totalPrice; }
     public String getStatus() { return status; }
