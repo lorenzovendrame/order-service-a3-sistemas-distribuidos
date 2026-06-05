@@ -3,7 +3,6 @@ package com.lorenzovendrame.orderservice.config;
 import io.awspring.cloud.sqs.config.SqsMessageListenerContainerFactory;
 import io.awspring.cloud.sqs.listener.QueueNotFoundStrategy;
 import software.amazon.awssdk.services.sqs.SqsAsyncClient;
-import tools.jackson.databind.json.JsonMapper;
 import io.awspring.cloud.sqs.support.converter.SqsMessagingMessageConverter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,13 +12,12 @@ import org.springframework.messaging.converter.JacksonJsonMessageConverter;
 public class SqsConfig {
 
     @Bean
-    public JsonMapper jsonMapper() {
-        return JsonMapper.builder().build();
-    }
+    public SqsMessagingMessageConverter sqsMessagingMessageConverter() {
 
-    @Bean
-    public SqsMessagingMessageConverter sqsMessagingMessageConverter(JsonMapper jsonMapper) {
-        JacksonJsonMessageConverter jacksonConverter = new JacksonJsonMessageConverter(jsonMapper);
+        JacksonJsonMessageConverter jacksonConverter = new JacksonJsonMessageConverter();
+
+        jacksonConverter.setSerializedPayloadClass(String.class);
+
         SqsMessagingMessageConverter converter = new SqsMessagingMessageConverter();
         converter.setPayloadMessageConverter(jacksonConverter);
         return converter;
