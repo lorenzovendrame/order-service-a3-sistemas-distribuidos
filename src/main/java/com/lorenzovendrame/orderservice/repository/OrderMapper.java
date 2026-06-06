@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Mapper
 public interface OrderMapper {
@@ -15,10 +16,10 @@ public interface OrderMapper {
 
     void insertOrderItem(OrderItem item);
 
-    int updateOrderStatus(@Param("orderId") String orderId, @Param("status") String status);
+    int updateOrderStatus(@Param("orderId") UUID orderId, @Param("status") String status);
 
-    Optional<Order> findById(@Param("orderId") String orderId);
+    Optional<Order> findById(@Param("orderId") UUID orderId);
 
-    List<OrderItem> findItemsByOrderId(@Param("orderId") String orderId);
+    List<OrderItem> findItemsByOrderId(@Param("orderId") UUID orderId);
 
 }
