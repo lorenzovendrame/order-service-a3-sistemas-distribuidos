@@ -21,8 +21,8 @@
     </resultMap>
 
     <insert id="insertOrder" parameterType="com.lorenzovendrame.orderservice.domain.Order">
-        INSERT INTO tb_orders (order_id, saga_id, user_id, event_id, status, paymentMethod, created_at, updated_at)
-        VALUES (#{orderId}, #{sagaId}, #{userId}, #{eventId}, #{status}, #{payment_method} #{createdAt}, #{updatedAt})
+        INSERT INTO tb_orders (order_id, saga_id, user_id, event_id, status, payment_method, created_at, updated_at)
+        VALUES (#{orderId}, #{sagaId}, #{userId}, #{eventId}, #{status}, #{paymentMethod}, #{createdAt}, #{updatedAt})
     </insert>
 
     <insert id="insertOrderItem" parameterType="com.lorenzovendrame.orderservice.domain.OrderItem">
@@ -37,7 +37,7 @@
     </update>
 
     <select id="findById" resultMap="OrderResultMap">
-        SELECT order_id, saga_id, user_id, event_id, status, paymentMethod, created_at, updated_at
+        SELECT order_id, saga_id, user_id, event_id, status, payment_method, created_at, updated_at
         FROM tb_orders
         WHERE order_id = #{orderId}
     </select>

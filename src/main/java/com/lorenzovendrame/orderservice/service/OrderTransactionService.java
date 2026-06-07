@@ -3,7 +3,6 @@ package com.lorenzovendrame.orderservice.service;
 import com.fasterxml.uuid.Generators;
 import com.lorenzovendrame.orderservice.domain.Order;
 import com.lorenzovendrame.orderservice.domain.OrderItem;
-import com.lorenzovendrame.orderservice.domain.enums.PaymentMethod;
 import com.lorenzovendrame.orderservice.domain.enums.PaymentStatus;
 import com.lorenzovendrame.orderservice.exception.BusinessException;
 import com.lorenzovendrame.orderservice.repository.OrderMapper;
