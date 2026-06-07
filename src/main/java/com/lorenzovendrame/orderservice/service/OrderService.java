@@ -1,7 +1,9 @@
 package com.lorenzovendrame.orderservice.service;
 
 import com.lorenzovendrame.orderservice.domain.Order;
+import com.lorenzovendrame.orderservice.domain.enums.OrderStatus;
 import com.lorenzovendrame.orderservice.dto.OrderCreatedEvent;
+import com.lorenzovendrame.orderservice.exception.BusinessException;
 import com.lorenzovendrame.orderservice.exception.OrderNotFoundException;
 import com.lorenzovendrame.orderservice.repository.OrderMapper;
 import org.springframework.stereotype.Service;
@@ -28,6 +30,11 @@ public class OrderService {
     private static final String QUEUE_NAME = "fila-reserva-assentos.fifo";
 
     public Order createOrder(Order order) {
+
+        if (!order.hasValidPaymentMethod()) {
+            throw new BusinessException("Método de pagamento não encontrado.");
+        }
+
         Order savedOrder = orderTransactionService.saveOrderWithItems(order);
 
         sendToSqs(savedOrder.getOrderId(), savedOrder.getSagaId(), savedOrder);
@@ -41,7 +48,7 @@ public class OrderService {
     }
 
     @Transactional
-    public void updateStatus(UUID orderId, String status) {
+    public void updateStatus(UUID orderId, OrderStatus status) {
         int affectedRows = orderMapper.updateOrderStatus(orderId, status);
         if (affectedRows == 0) {
             throw new OrderNotFoundException(orderId);
@@ -61,7 +68,7 @@ public class OrderService {
                 orderUuid.toString(),
                 order.getUserId().toString(),
                 order.getEventId().toString(),
-                order.getTotalPrice(),
+                order.getPaymentMethod().name(),
                 itemEvents
         );
 
