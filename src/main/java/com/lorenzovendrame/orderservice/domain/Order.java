@@ -1,7 +1,7 @@
 package com.lorenzovendrame.orderservice.domain;
 
 import com.lorenzovendrame.orderservice.domain.enums.PaymentMethod;
-import com.lorenzovendrame.orderservice.domain.enums.PaymentStatus;
+import com.lorenzovendrame.orderservice.domain.enums.OrderStatus;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -13,7 +13,7 @@ public class Order {
     private UUID userId;
     private UUID eventId;
     private PaymentMethod paymentMethod;
-    private PaymentStatus status;     // PENDING, COMPLETED, CANCELED
+    private OrderStatus status;     // PENDING, COMPLETED, CANCELED
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     private List<OrderItem> items;
@@ -35,8 +35,8 @@ public class Order {
     public void setUserId(UUID userId) { this.userId = userId; }
     public UUID getEventId() { return eventId; }
     public void setEventId(UUID eventId) { this.eventId = eventId; }
-    public PaymentStatus getStatus() { return status; }
-    public void setStatus(PaymentStatus status) { this.status = status; }
+    public OrderStatus getStatus() { return status; }
+    public void setStatus(OrderStatus status) { this.status = status; }
     public LocalDateTime getCreatedAt() { return createdAt; }
     public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
     public LocalDateTime getUpdatedAt() { return updatedAt; }

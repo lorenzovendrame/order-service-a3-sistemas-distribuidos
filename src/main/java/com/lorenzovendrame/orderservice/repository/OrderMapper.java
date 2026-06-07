@@ -2,7 +2,7 @@ package com.lorenzovendrame.orderservice.repository;
 
 import com.lorenzovendrame.orderservice.domain.Order;
 import com.lorenzovendrame.orderservice.domain.OrderItem;
-import com.lorenzovendrame.orderservice.domain.enums.PaymentStatus;
+import com.lorenzovendrame.orderservice.domain.enums.OrderStatus;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -17,7 +17,7 @@ public interface OrderMapper {
 
     void insertOrderItem(OrderItem item);
 
-    int updateOrderStatus(@Param("orderId") UUID orderId, @Param("status") PaymentStatus status);
+    int updateOrderStatus(@Param("orderId") UUID orderId, @Param("status") OrderStatus status);
 
     Optional<Order> findById(@Param("orderId") UUID orderId);
 

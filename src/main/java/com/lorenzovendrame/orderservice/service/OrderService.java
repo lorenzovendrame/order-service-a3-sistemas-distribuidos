@@ -1,7 +1,7 @@
 package com.lorenzovendrame.orderservice.service;
 
 import com.lorenzovendrame.orderservice.domain.Order;
-import com.lorenzovendrame.orderservice.domain.enums.PaymentStatus;
+import com.lorenzovendrame.orderservice.domain.enums.OrderStatus;
 import com.lorenzovendrame.orderservice.dto.OrderCreatedEvent;
 import com.lorenzovendrame.orderservice.exception.BusinessException;
 import com.lorenzovendrame.orderservice.exception.OrderNotFoundException;
@@ -48,7 +48,7 @@ public class OrderService {
     }
 
     @Transactional
-    public void updateStatus(UUID orderId, PaymentStatus status) {
+    public void updateStatus(UUID orderId, OrderStatus status) {
         int affectedRows = orderMapper.updateOrderStatus(orderId, status);
         if (affectedRows == 0) {
             throw new OrderNotFoundException(orderId);
