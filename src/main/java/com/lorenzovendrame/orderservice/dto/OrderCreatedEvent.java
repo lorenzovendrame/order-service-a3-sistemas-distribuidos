@@ -1,6 +1,5 @@
 package com.lorenzovendrame.orderservice.dto;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 public record OrderCreatedEvent(
@@ -8,7 +7,7 @@ public record OrderCreatedEvent(
         String orderId,
         String userId,
         String eventId,
-        BigDecimal totalPrice,
+        String paymentMethod,
         List<ItemEvent> items
 ) {
     public record ItemEvent(

@@ -1,5 +1,6 @@
 package com.lorenzovendrame.orderservice.controller;
 
+import com.lorenzovendrame.orderservice.domain.enums.PaymentStatus;
 import com.lorenzovendrame.orderservice.dto.OrderResponseEvent;
 import com.lorenzovendrame.orderservice.service.OrderService;
 import io.awspring.cloud.sqs.annotation.SqsListener;
@@ -22,7 +23,7 @@ public class OrderQueueListener {
         //log.warn("Saga {} - Pedido recusado por falta de assentos disponíveis. Motivo: {}", event.sagaId(), event.reason());
 
         UUID orderId = UUID.fromString(event.orderId());
-        orderService.updateStatus(orderId, "CANCELED_NO_STOCK");
+        orderService.updateStatus(orderId, PaymentStatus.REJECTED);
     }
 
     // Fila disparada pelo Pagamentos quando a cobrança falha
@@ -31,7 +32,7 @@ public class OrderQueueListener {
         //log.warn("Saga {} - Pedido cancelado devido a falha no pagamento. Motivo: {}", event.sagaId(), event.reason());
 
         UUID orderId = UUID.fromString(event.orderId());
-        orderService.updateStatus(orderId, "CANCELED_PAYMENT_FAILED");
+        orderService.updateStatus(orderId, PaymentStatus.CANCELLED);
     }
     // Fila disparada pelo Pagamentos quando o pagamento for aprovado
     @SqsListener("fila-pedido-sucesso.fifo")
@@ -39,6 +40,6 @@ public class OrderQueueListener {
         //log.info("Saga {} - 🎉 Pedido faturado e concluído com sucesso!", event.sagaId());
 
         UUID orderId = UUID.fromString(event.orderId());
-        orderService.updateStatus(orderId, "COMPLETED");
+        orderService.updateStatus(orderId, PaymentStatus.APPROVED);
     }
 }

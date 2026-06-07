@@ -10,8 +10,8 @@
         <result property="sagaId" column="saga_id" typeHandler="com.lorenzovendrame.orderservice.config.UuidBinaryTypeHandler"/>
         <result property="userId" column="user_id" typeHandler="com.lorenzovendrame.orderservice.config.UuidBinaryTypeHandler"/>
         <result property="eventId" column="event_id" typeHandler="com.lorenzovendrame.orderservice.config.UuidBinaryTypeHandler"/>
-        <result property="totalPrice" column="total_price"/>
         <result property="status" column="status"/>
+        <result property="paymentMethod" column="payment_method"/>
         <result property="createdAt" column="created_at"/>
         <result property="updatedAt" column="updated_at"/>
 
@@ -21,8 +21,8 @@
     </resultMap>
 
     <insert id="insertOrder" parameterType="com.lorenzovendrame.orderservice.domain.Order">
-        INSERT INTO tb_orders (order_id, saga_id, user_id, event_id, total_price, status, created_at, updated_at)
-        VALUES (#{orderId}, #{sagaId}, #{userId}, #{eventId}, #{totalPrice}, #{status}, #{createdAt}, #{updatedAt})
+        INSERT INTO tb_orders (order_id, saga_id, user_id, event_id, status, paymentMethod, created_at, updated_at)
+        VALUES (#{orderId}, #{sagaId}, #{userId}, #{eventId}, #{status}, #{payment_method} #{createdAt}, #{updatedAt})
     </insert>
 
     <insert id="insertOrderItem" parameterType="com.lorenzovendrame.orderservice.domain.OrderItem">
@@ -37,7 +37,7 @@
     </update>
 
     <select id="findById" resultMap="OrderResultMap">
-        SELECT order_id, saga_id, user_id, event_id, total_price, status, created_at, updated_at
+        SELECT order_id, saga_id, user_id, event_id, status, paymentMethod, created_at, updated_at
         FROM tb_orders
         WHERE order_id = #{orderId}
     </select>
