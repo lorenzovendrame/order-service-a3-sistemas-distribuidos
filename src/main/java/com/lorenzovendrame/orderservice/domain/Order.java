@@ -13,6 +13,7 @@ public class Order {
     private UUID userId;
     private UUID eventId;
     private PaymentMethod paymentMethod;
+    private String installments;
     private OrderStatus status;     // PENDING, COMPLETED, CANCELED
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
@@ -48,5 +49,11 @@ public class Order {
     }
     public void setPaymentMethod(PaymentMethod paymentMethod) {
         this.paymentMethod = paymentMethod;
+    }
+    public String getInstallments() {
+        return installments;
+    }
+    public void setInstallments(String installments) {
+        this.installments = installments;
     }
 }
