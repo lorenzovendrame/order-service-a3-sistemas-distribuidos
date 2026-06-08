@@ -8,6 +8,7 @@ public record OrderCreatedEvent(
         String userId,
         String eventId,
         String paymentMethod,
+        String installments,
         List<ItemEvent> items
 ) {
     public record ItemEvent(

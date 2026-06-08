@@ -69,6 +69,7 @@ public class OrderService {
                 order.getUserId().toString(),
                 order.getEventId().toString(),
                 order.getPaymentMethod().name(),
+                order.getInstallments(),
                 itemEvents
         );
 
