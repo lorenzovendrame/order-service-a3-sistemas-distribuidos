@@ -27,7 +27,7 @@
         <url/>
     </scm>
     <properties>
-        <java.version>25</java.version>
+        <java.version>21</java.version>
     </properties>
 
     <dependencyManagement>
@@ -118,6 +118,7 @@
     </dependencies>
 
     <build>
+        <finalName>order-service</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
